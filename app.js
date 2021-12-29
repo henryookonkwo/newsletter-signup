@@ -36,7 +36,7 @@ app.post("/", (req,res) =>{
     let lastName = req.body.lName;
     let email = req.body.email ;
 
-    // console.log(firstName + " " + lastName + " " + email);
+    console.log(firstName + " " + lastName + " " + email);
     // res.send("Post request received");
       
 //*****************************ENTER YOU LIST ID HERE******************************
@@ -51,7 +51,7 @@ const subscribingUser = {
  async function run() {
 const response = await mailchimp.lists.addListMember(listId, {
  email_address: subscribingUser.email,
- status: "pending",
+ status: "subscribed",
  merge_fields: {
  FNAME: subscribingUser.firstName,
  LNAME: subscribingUser.lastName
@@ -73,7 +73,7 @@ app.post("/failure", (req,res) =>{
     res.redirect("/");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log("Server is running on port " + port);
 });
 
